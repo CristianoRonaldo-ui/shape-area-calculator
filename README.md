@@ -1,11 +1,11 @@
 # Shape Area Calculator
 
-A small Java program that uses an **abstract `Shape` class** and **polymorphism** to calculate the area and perimeter of different shapes (circles and rectangles) through one shared interface
+A small Java program that uses an **abstract `Shape` class** and **polymorphism** to calculate the area and perimeter of different shapes (circles, rectangles and triangles) through one shared interface
 
 ## Features
 
 - Abstract base class `Shape` that cannot be instantiated and forces every subclass to implement `getArea()` and `getPerimeter()`
-- Two concrete subclasses: `Circle` and `Rectangle`
+- Three concrete subclasses: `Circle`, `Rectangle` and `Triangle` (area via Heron's formula)
 - A single `Shape[]` array holding different shape types, processed with one polymorphic loop
 - `findLargestShape()` returns the shape with the largest area
 - `calculateTotalArea()` sums the area of all shapes
@@ -22,6 +22,7 @@ shape-area-calculator/
     ├── Circle.java           # Circle extends Shape
     ├── Rectangle.java        # Rectangle extends Shape
     └── ShapeCalculator.java  # main program, helper methods, tests
+    ├── Triangle.java         # Triangle extends Shape (Heron's formula)
 ```
 ## How to Run
 
@@ -39,12 +40,14 @@ java -cp src ShapeCalculator
 Circle | Area: 12.57 | Perimeter: 12.57
 Rectangle | Area: 12.00 | Perimeter: 14.00
 Circle | Area: 7.07 | Perimeter: 9.42
+Triangle | Area: 6.00 | Perimeter: 12.00
 Largest shape: Circle (12.57)
-Total area: 31.63
+Total area: 37.63
 
 --- Manual Tests ---
 PASS: Circle area with radius 1
 PASS: Rectangle perimeter 3x4
+PASS: Triangle area 3-4-5 (Heron)
 PASS: Total area of two rectangles
 ```
 ## Complexity Analysis
@@ -65,10 +68,11 @@ Let *n* be the number of shapes in the array
 - **`super(...)` in constructors:** each subclass passes its own name up to the `Shape` constructor. It must be the first line of the constructor.
 - **Comparing `double` values:** floating-point numbers are not stored exactly (for example, `0.1 + 0.2` gives `0.30000000000000004`), so my tests check `Math.abs(actual - expected) < 0.0001` instead of using `==`
 - **Round at the end, not in the middle:** the rounded areas add up to 31.64, but the real total printed is 31.63, because Java adds the unrounded values and only formats the final result.
+- **Open/Closed Principle:** adding `Triangle` only required a new class and one new array entry. The print loop, `findLargestShape()` and `calculateTotalArea()` did not change at all, because they only depend on the abstract `Shape` type. The code is open for extension but closed for modification
 
 ## Future Improvements
 
-- Add a `Triangle` subclass (for example, using Heron's formula for the area)
 - Handle an empty array in `findLargestShape()`, which currently throws `ArrayIndexOutOfBoundsException`
 - Validate input so a radius, width or length cannot be zero or negative
 - Replace the manual tests with JUnit
+- Reject side lengths that cannot form a triangle (e.g. 1, 2, 10), which currently make Heron's formula return `NaN`
