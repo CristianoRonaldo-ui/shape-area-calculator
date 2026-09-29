@@ -21,8 +21,8 @@ shape-area-calculator/
     ├── Shape.java            # abstract base class
     ├── Circle.java           # Circle extends Shape
     ├── Rectangle.java        # Rectangle extends Shape
-    └── ShapeCalculator.java  # main program, helper methods, tests
-    ├── Triangle.java         # Triangle extends Shape (Heron's formula)
+    ├──ShapeCalculator.java  # main program, helper methods, tests
+    └──  Triangle.java         # Triangle extends Shape (Heron's formula)
 ```
 ## How to Run
 
