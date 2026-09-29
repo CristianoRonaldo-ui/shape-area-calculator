@@ -1,9 +1,10 @@
 public class ShapeCalculator {
     public static void main(String[] args) {
-        Shape[] shapes = new Shape[3];
+        Shape[] shapes = new Shape[4];
         shapes[0] = new Circle(2.0);
         shapes[1] = new Rectangle(3.0, 4.0);
         shapes[2] = new Circle(1.5);
+        shapes[3] = new Triangle(3.0, 4.0, 5.0);
 
         for (Shape shape : shapes) {
             System.out.println(shape.getName()
@@ -22,6 +23,7 @@ public class ShapeCalculator {
         System.out.println("--- Manual Tests ---");
         checkTest("Circle area with radius 1", new Circle(1.0).getArea(), Math.PI);
         checkTest("Rectangle perimeter 3x4", new Rectangle(3.0, 4.0).getPerimeter(), 14.0);
+        checkTest("Triangle area 3-4-5 (Heron)", new Triangle(3.0, 4.0, 5.0).getArea(), 6.0);
 
         Shape[] testShapes = { new Rectangle(2.0, 5.0), new Rectangle(1.0, 1.0) };
         checkTest("Total area of two rectangles", calculateTotalArea(testShapes), 11.0);
