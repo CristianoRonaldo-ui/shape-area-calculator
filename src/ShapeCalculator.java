@@ -14,6 +14,9 @@ public class ShapeCalculator {
         Shape largest = findLargestShape(shapes);
         System.out.println("Largest shape: " + largest.getName()
                 + " (" + String.format("%.2f", largest.getArea()) + ")");
+
+        double totalArea = calculateTotalArea(shapes);
+        System.out.println("Total area: " + String.format("%.2f", totalArea));
     }
 
     public static Shape findLargestShape(Shape[] shapes) {
@@ -24,5 +27,13 @@ public class ShapeCalculator {
             }
         }
         return largest;
+    }
+
+    public static double calculateTotalArea(Shape[] shapes) {
+        double total = 0.0;
+        for (Shape shape : shapes) {
+            total += shape.getArea();
+        }
+        return total;
     }
 }
