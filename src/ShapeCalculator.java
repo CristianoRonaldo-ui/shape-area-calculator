@@ -7,8 +7,22 @@ public class ShapeCalculator {
 
         for (Shape shape : shapes) {
             System.out.println(shape.getName()
-                + " | Area: " + String.format("%.2f", shape.getArea())
-                + " | Perimeter: " + String.format("%.2f", shape.getPerimeter()));
+                    + " | Area: " + String.format("%.2f", shape.getArea())
+                    + " | Perimeter: " + String.format("%.2f", shape.getPerimeter()));
         }
+
+        Shape largest = findLargestShape(shapes);
+        System.out.println("Largest shape: " + largest.getName()
+                + " (" + String.format("%.2f", largest.getArea()) + ")");
     }
-} 
+
+    public static Shape findLargestShape(Shape[] shapes) {
+        Shape largest = shapes[0];
+        for (Shape shape : shapes) {
+            if (shape.getArea() > largest.getArea()) {
+                largest = shape;
+            }
+        }
+        return largest;
+    }
+}
